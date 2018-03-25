@@ -1,7 +1,6 @@
 package com.bank.domain;
 
-public enum TransactionStatus {
-    PENDING,
-    COMPLETED,
-    ERRORED
+public enum  TransactionStatus {
+    EXECUTED,
+    FAILED
 }
