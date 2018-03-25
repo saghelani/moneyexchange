@@ -16,9 +16,9 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * This method returns an account based on the accountId
-     * @param accountId
-     * @return Account
-     * @throws NotFoundException
+     * @param accountId Id of the account to get
+     * @return the account
+     * @throws NotFoundException when the account does not exist
      */
     @Override
     public Account getAccount(long accountId) {
@@ -31,7 +31,7 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * This method returns all available accounts
-     * @return List<Account>
+     * @return list of accounts
      */
     @Override
     public List<Account> getAccounts() {
@@ -40,8 +40,8 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * This method creates an account if it does not exist otherwise it updates it
-     * @param account
-     * @return Account
+     * @param account Account to create or update
+     * @return the account
      */
     @Override
     public Account createOrUpdateAccount(Account account) {
@@ -50,7 +50,7 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * This method deletes an account by id
-     * @param accountId
+     * @param accountId Id of account to delete
      * @throws NotFoundException when the account does not exist
      */
     @Override

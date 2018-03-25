@@ -21,9 +21,9 @@ public class TransactionServiceImpl implements TransactionService {
 
     /**
      * This method returns a transaction based on the transactionId
-     * @param transactionId
-     * @return Transaction
-     * @throws NotFoundException
+     * @param transactionId Id of the transaction to get
+     * @return the transaction
+     * @throws NotFoundException when the transaction does not exist
      */
     @Override
     public Transaction getTransaction(long transactionId) {
@@ -36,7 +36,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     /**
      * This method returns all transactions available
-     * @return List<Transaction>
+     * @return a list of transactions
      */
     @Override
     public List<Transaction> getTransactions() {
@@ -45,8 +45,8 @@ public class TransactionServiceImpl implements TransactionService {
 
     /**
      * This method executes the transaction defined in the input parameter
-     * @param transaction
-     * @return Transaction
+     * @param transaction to execute
+     * @return the executed transaction
      * @throws TransactionExecutionException when the transaction execution fails
      */
     @Override

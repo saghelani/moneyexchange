@@ -33,7 +33,7 @@ public class HibernateAccountDao extends AbstractDAO<Account> implements Account
 
     /**
      * This method deletes an account by id
-     * @param id
+     * @param id Id of the account to delete
      * @throws NotFoundException when the account does not exist
      */
     @Override
