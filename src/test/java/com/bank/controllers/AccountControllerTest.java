@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
 import java.util.Currency;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -63,12 +64,22 @@ public class AccountControllerTest {
         assertThat(expectedException, notNullValue());
         assertThat(expectedException.getResponse().getStatus(), equalTo(404));
         assertThat(expectedException.getResponse().getMediaType().toString(), equalTo(MediaType.APPLICATION_JSON));
+        verify(accountServiceMock).getAccount(1);
+    }
+
+    @Test
+    public void testGetAccounts() {
+        Response result = resources.target("/accounts").request().get();
+
+        assertThat(result.getStatusInfo(), equalTo(Response.Status.OK));
+        verify(accountServiceMock).getAccounts();
     }
 
     @Test
     public void testDeleteValidAccount() {
-        resources.target("/accounts/1").request().delete(Account.class);
+        Response result = resources.target("/accounts/1").request().delete();
 
+        assertThat(result.getStatusInfo(), equalTo(Response.Status.NO_CONTENT));
         verify(accountServiceMock).deleteAccount(1);
     }
 
@@ -85,6 +96,7 @@ public class AccountControllerTest {
         assertThat(expectedException, notNullValue());
         assertThat(expectedException.getResponse().getStatus(), equalTo(404));
         assertThat(expectedException.getResponse().getMediaType().toString(), equalTo(MediaType.APPLICATION_JSON));
+        verify(accountServiceMock).deleteAccount(1);
     }
 
     @Test

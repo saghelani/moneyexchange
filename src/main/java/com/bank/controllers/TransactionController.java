@@ -29,7 +29,7 @@ public class TransactionController {
 
     @POST
     @UnitOfWork
-    public Transaction executeTransaction(@Valid Transaction transaction) throws TransactionExecutionException {
+    public Transaction executeTransaction(@Valid Transaction transaction) {
         return transactionService.executeTransaction(transaction);
     }
 

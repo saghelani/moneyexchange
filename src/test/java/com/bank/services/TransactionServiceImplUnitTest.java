@@ -68,7 +68,7 @@ public class TransactionServiceImplUnitTest {
     }
 
     @Test
-    public void testExecuteValidTransaction() throws TransactionExecutionException {
+    public void testExecuteValidTransaction() {
         Transaction expected = new Transaction(123, 234, new Money(Currency.getInstance("GBP"), 10));
         Account account = new Account("John", new Money(Currency.getInstance("GBP"), 100), "current");
         Account account2 = new Account("John", new Money(Currency.getInstance("GBP"), 50), "current");
@@ -88,7 +88,7 @@ public class TransactionServiceImplUnitTest {
     }
 
     @Test(expected = TransactionExecutionException.class)
-    public void testExecuteTransactionWhenAccountHasInsufficientFunds() throws TransactionExecutionException {
+    public void testExecuteTransactionWhenAccountHasInsufficientFunds() {
         Transaction expected = new Transaction(123, 234, new Money(Currency.getInstance("GBP"), 10));
         Account account = new Account("John", new Money(Currency.getInstance("GBP"), 5), "current");
         Account account2 = new Account("John", new Money(Currency.getInstance("GBP"), 50), "current");
@@ -107,7 +107,7 @@ public class TransactionServiceImplUnitTest {
     }
 
     @Test(expected = TransactionExecutionException.class)
-    public void testExecuteTransactionWhenAccountInvalid() throws TransactionExecutionException {
+    public void testExecuteTransactionWhenAccountInvalid() {
         Transaction expected = new Transaction(123, 234, new Money(Currency.getInstance("GBP"), 10));
         Mockito.when(accountServiceMock.getAccount(123)).thenThrow(NotFoundException.class);
 

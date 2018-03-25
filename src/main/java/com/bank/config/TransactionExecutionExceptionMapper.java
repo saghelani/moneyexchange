@@ -10,7 +10,7 @@ public class TransactionExecutionExceptionMapper implements ExceptionMapper<Tran
 
     @Override
     public Response toResponse(TransactionExecutionException e) {
-        return Response.status(422)
+        return Response.status(400)
                 .entity(e.getMessage())
                 .type(MediaType.APPLICATION_JSON)
                 .build();

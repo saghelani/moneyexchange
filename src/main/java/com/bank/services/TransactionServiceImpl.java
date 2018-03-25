@@ -34,7 +34,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction executeTransaction(Transaction transaction) throws TransactionExecutionException {
+    public Transaction executeTransaction(Transaction transaction) {
         Account remitterAccount;
         Account beneficiaryAccount;
 

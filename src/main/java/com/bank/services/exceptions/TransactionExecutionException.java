@@ -1,8 +1,13 @@
 package com.bank.services.exceptions;
 
-public class TransactionExecutionException extends Exception {
+import io.dropwizard.cli.Cli;
+
+import javax.ws.rs.ClientErrorException;
+import javax.ws.rs.core.Response;
+
+public class TransactionExecutionException extends ClientErrorException {
 
     public TransactionExecutionException(String message) {
-        super(message);
+        super(message, Response.Status.BAD_REQUEST);
     }
 }

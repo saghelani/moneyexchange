@@ -9,6 +9,9 @@ database:
     hibernate.dialect: org.hibernate.dialect.H2Dialect
     hibernate.hbm2ddl.auto: create
 
+server:
+    registerDefaultExceptionMappers: false
+
 logging:
   level: INFO
   loggers:
