@@ -31,6 +31,11 @@ public class HibernateAccountDao extends AbstractDAO<Account> implements Account
         return persist(account);
     }
 
+    /**
+     * This method deletes an account by id
+     * @param id
+     * @throws NotFoundException when the account does not exist
+     */
     @Override
     public void delete(long id) {
         try {

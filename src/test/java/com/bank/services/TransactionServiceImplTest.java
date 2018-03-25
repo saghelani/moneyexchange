@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 
-import static com.sun.javaws.JnlpxArgs.verify;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;

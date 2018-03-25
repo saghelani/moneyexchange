@@ -19,6 +19,12 @@ public class TransactionServiceImpl implements TransactionService {
         this.accountService = accountService;
     }
 
+    /**
+     * This method returns a transaction based on the transactionId
+     * @param transactionId
+     * @return Transaction
+     * @throws NotFoundException
+     */
     @Override
     public Transaction getTransaction(long transactionId) {
         Transaction transaction = transactionDao.get(transactionId);
@@ -28,11 +34,21 @@ public class TransactionServiceImpl implements TransactionService {
         throw new NotFoundException(String.format("Transaction %s not found", transactionId));
     }
 
+    /**
+     * This method returns all transactions available
+     * @return List<Transaction>
+     */
     @Override
     public List<Transaction> getTransactions() {
         return transactionDao.getAll();
     }
 
+    /**
+     * This method executes the transaction defined in the input parameter
+     * @param transaction
+     * @return Transaction
+     * @throws TransactionExecutionException when the transaction execution fails
+     */
     @Override
     public Transaction executeTransaction(Transaction transaction) {
         Account remitterAccount;
