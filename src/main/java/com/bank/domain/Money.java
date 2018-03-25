@@ -31,4 +31,5 @@ public class Money {
     public double getValue() {
         return value;
     }
+
 }

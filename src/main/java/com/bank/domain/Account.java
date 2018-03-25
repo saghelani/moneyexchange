@@ -68,19 +68,4 @@ public class Account {
         return type;
     }
 
-    //
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (this == obj)
-//            return true;
-//        if (obj == null || getClass() != obj.getClass())
-//            return false;
-//        Account otherAccount = (Account) obj;
-//        return Objects.equals(id, otherAccount.id);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hashCode(id);
-//    }
 }
