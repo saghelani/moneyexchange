@@ -3,8 +3,6 @@ package com.bank.domain;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.Currency;
-import java.util.Objects;
 
 @Entity
 @Table(name = "transactions")

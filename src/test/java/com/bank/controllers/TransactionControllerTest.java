@@ -2,8 +2,6 @@ package com.bank.controllers;
 
 import com.bank.config.NotFoundExceptionMapper;
 import com.bank.config.TransactionExecutionExceptionMapper;
-import com.bank.domain.Account;
-import com.bank.domain.Transaction;
 import com.bank.domain.Money;
 import com.bank.domain.Transaction;
 import com.bank.services.TransactionService;

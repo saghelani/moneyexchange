@@ -2,7 +2,6 @@ package com.bank.controllers;
 
 import com.bank.domain.Transaction;
 import com.bank.services.TransactionService;
-import com.bank.services.exceptions.TransactionExecutionException;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.validation.Valid;

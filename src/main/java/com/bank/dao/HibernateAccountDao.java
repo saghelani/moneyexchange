@@ -1,9 +1,7 @@
 package com.bank.dao;
 
-import com.bank.dao.AccountDao;
 import com.bank.domain.Account;
 import io.dropwizard.hibernate.AbstractDAO;
-import io.dropwizard.hibernate.UnitOfWork;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.EntityNotFoundException;

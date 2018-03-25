@@ -1,7 +1,5 @@
 package com.bank.services.exceptions;
 
-import io.dropwizard.cli.Cli;
-
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.core.Response;
 

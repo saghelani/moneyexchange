@@ -7,16 +7,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import javax.persistence.EntityNotFoundException;
 import javax.ws.rs.NotFoundException;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyByte;
 import static org.mockito.Mockito.doThrow;
 
 public class AccountServiceImplTest {

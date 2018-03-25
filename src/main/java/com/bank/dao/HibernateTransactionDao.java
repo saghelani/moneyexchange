@@ -1,6 +1,5 @@
 package com.bank.dao;
 
-import com.bank.domain.Account;
 import com.bank.domain.Transaction;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;

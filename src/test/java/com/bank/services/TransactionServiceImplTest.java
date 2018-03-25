@@ -2,12 +2,11 @@ package com.bank.services;
 
 import com.bank.dao.TransactionDao;
 import com.bank.domain.Account;
-import com.bank.domain.Transaction;
 import com.bank.domain.Money;
+import com.bank.domain.Transaction;
 import com.bank.domain.TransactionStatus;
 import com.bank.services.exceptions.TransactionExecutionException;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;

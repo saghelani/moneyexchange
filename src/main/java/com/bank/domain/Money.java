@@ -1,8 +1,5 @@
 package com.bank.domain;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.persistence.Embeddable;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Currency;

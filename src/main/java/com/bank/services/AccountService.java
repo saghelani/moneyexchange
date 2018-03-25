@@ -2,7 +2,6 @@ package com.bank.services;
 
 import com.bank.domain.Account;
 
-import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 public interface AccountService {

@@ -1,9 +1,7 @@
 package com.bank.services;
 
 import com.bank.domain.Transaction;
-import com.bank.services.exceptions.TransactionExecutionException;
 
-import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 public interface TransactionService {

@@ -1,6 +1,5 @@
 package com.bank.dao;
 
-import com.bank.domain.Transaction;
 import com.bank.domain.Money;
 import com.bank.domain.Transaction;
 import io.dropwizard.testing.junit.DAOTestRule;
