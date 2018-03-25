@@ -19,7 +19,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyByte;
 import static org.mockito.Mockito.doThrow;
 
-public class AccountServiceImplUnitTest {
+public class AccountServiceImplTest {
 
     AccountService accountService;
     AccountDao accountDaoMock;

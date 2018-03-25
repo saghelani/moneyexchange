@@ -16,7 +16,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
-public class HibernateTransactionDaoIntegrationTest {
+public class HibernateTransactionDaoTest {
 
     @Rule
     public DAOTestRule database = DAOTestRule.newBuilder().addEntityClass(Transaction.class).build();

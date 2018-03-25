@@ -22,7 +22,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 
-public class TransactionServiceImplUnitTest {
+public class TransactionServiceImplTest {
 
     TransactionService transactionService;
     AccountService accountServiceMock;

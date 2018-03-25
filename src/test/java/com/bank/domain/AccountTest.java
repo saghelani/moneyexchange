@@ -7,7 +7,7 @@ import java.util.Currency;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
-public class AccountUnitTest {
+public class AccountTest {
 
     @Test
     public void correctlyUpdatesBalanceOnDeposit() {
