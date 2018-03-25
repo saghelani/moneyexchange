@@ -9,7 +9,6 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import io.dropwizard.testing.junit.DAOTestRule;
 
 public class MoneyExchangeApplication extends Application<MoneyExchangeConfiguration> {
 

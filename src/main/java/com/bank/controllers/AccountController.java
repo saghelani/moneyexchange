@@ -41,14 +41,14 @@ public class AccountController{
     @GET
     @Path("/{accountId}")
     @UnitOfWork
-    public Account getAccount(@PathParam("accountId") @NotNull long accountId) throws NotFoundException {
+    public Account getAccount(@PathParam("accountId") @NotNull long accountId) {
         return accountService.getAccount(accountId);
     }
 
     @DELETE
     @Path("/{accountId}")
     @UnitOfWork
-    public void deleteAccount(@PathParam("accountId") @NotNull long accountId) throws NotFoundException {
+    public void deleteAccount(@PathParam("accountId") @NotNull long accountId) {
         accountService.deleteAccount(accountId);
     }
 

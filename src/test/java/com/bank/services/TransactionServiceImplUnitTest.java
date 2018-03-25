@@ -7,6 +7,7 @@ import com.bank.domain.Money;
 import com.bank.domain.TransactionStatus;
 import com.bank.services.exceptions.TransactionExecutionException;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
@@ -41,7 +42,7 @@ public class TransactionServiceImplUnitTest {
 
         Transaction result = transactionService.getTransaction(123);
 
-        assertThat(result.getRemitterAccountId(), equalTo(123));
+        assertThat(result.getRemitterAccountId(), equalTo(123L));
         Mockito.verify(transactionDaoMock, Mockito.times(1)).get(any(Long.class));
     }
 
@@ -69,8 +70,8 @@ public class TransactionServiceImplUnitTest {
     @Test
     public void testExecuteValidTransaction() throws TransactionExecutionException {
         Transaction expected = new Transaction(123, 234, new Money(Currency.getInstance("GBP"), 10));
-        Account account = new Account(123, "John", new Money(Currency.getInstance("GBP"), 100), "current");
-        Account account2 = new Account(234,"John", new Money(Currency.getInstance("GBP"), 50), "current");
+        Account account = new Account("John", new Money(Currency.getInstance("GBP"), 100), "current");
+        Account account2 = new Account("John", new Money(Currency.getInstance("GBP"), 50), "current");
         Mockito.when(accountServiceMock.getAccount(123)).thenReturn(account);
         Mockito.when(accountServiceMock.getAccount(234)).thenReturn(account2);
 
@@ -89,8 +90,8 @@ public class TransactionServiceImplUnitTest {
     @Test(expected = TransactionExecutionException.class)
     public void testExecuteTransactionWhenAccountHasInsufficientFunds() throws TransactionExecutionException {
         Transaction expected = new Transaction(123, 234, new Money(Currency.getInstance("GBP"), 10));
-        Account account = new Account(123, "John", new Money(Currency.getInstance("GBP"), 5), "current");
-        Account account2 = new Account(234,"John", new Money(Currency.getInstance("GBP"), 50), "current");
+        Account account = new Account("John", new Money(Currency.getInstance("GBP"), 5), "current");
+        Account account2 = new Account("John", new Money(Currency.getInstance("GBP"), 50), "current");
         Mockito.when(accountServiceMock.getAccount(123)).thenReturn(account);
         Mockito.when(accountServiceMock.getAccount(234)).thenReturn(account2);
 

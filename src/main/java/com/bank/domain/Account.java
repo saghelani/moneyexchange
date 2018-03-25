@@ -44,11 +44,6 @@ public class Account {
         this.type = type;
     }
 
-    public Account(long id, String holder, Money balance, String type) {
-        this(holder, balance, type);
-        this.id = id;
-    }
-
     public void withdraw(double amount) {
         balance = new Money(balance.getCurrency(), balance.getValue() - amount);
     }

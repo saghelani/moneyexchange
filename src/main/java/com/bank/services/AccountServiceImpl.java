@@ -15,7 +15,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account getAccount(long accountId) throws NotFoundException {
+    public Account getAccount(long accountId) {
         Account account = accountDao.get(accountId);
         if (account != null) {
             return account;
@@ -35,7 +35,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void deleteAccount(long accountId) {
-        accountDao.delete(accountId);
+        accountDao.delete(accountId);;
     }
 
 }

@@ -20,7 +20,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction getTransaction(long transactionId) throws NotFoundException {
+    public Transaction getTransaction(long transactionId) {
         Transaction transaction = transactionDao.get(transactionId);
         if (transaction != null) {
             return transaction;

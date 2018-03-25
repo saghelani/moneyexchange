@@ -36,7 +36,7 @@ public class TransactionController {
     @GET
     @Path("/{transactionId}")
     @UnitOfWork
-    public Transaction getTransaction(@PathParam("transactionId") @NotNull long transactionId) throws NotFoundException {
+    public Transaction getTransaction(@PathParam("transactionId") @NotNull long transactionId) {
         return transactionService.getTransaction(transactionId);
     }
 

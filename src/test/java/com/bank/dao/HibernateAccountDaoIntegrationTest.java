@@ -8,6 +8,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import javax.validation.ConstraintViolationException;
+import javax.ws.rs.NotFoundException;
 import java.util.Currency;
 import java.util.List;
 
@@ -114,6 +115,11 @@ public class HibernateAccountDaoIntegrationTest {
         List<Account> result = accountDao.getAll();
 
         assertThat(result.size(), equalTo(1));
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void testDeleteAccountThatDoesNotExist() {
+        database.inTransaction(() -> accountDao.delete(1));
     }
 
 }

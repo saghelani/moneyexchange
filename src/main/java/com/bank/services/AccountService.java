@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface AccountService {
 
-    Account getAccount(long accountId) throws NotFoundException;
+    Account getAccount(long accountId);
     List<Account> getAccounts();
     Account createOrUpdateAccount(Account account);
-    void deleteAccount(long accountId) throws NotFoundException;
+    void deleteAccount(long accountId);
 
 }

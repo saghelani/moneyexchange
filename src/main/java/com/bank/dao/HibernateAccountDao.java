@@ -6,6 +6,8 @@ import io.dropwizard.hibernate.AbstractDAO;
 import io.dropwizard.hibernate.UnitOfWork;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.EntityNotFoundException;
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 public class HibernateAccountDao extends AbstractDAO<Account> implements AccountDao {
@@ -31,9 +33,13 @@ public class HibernateAccountDao extends AbstractDAO<Account> implements Account
 
     @Override
     public void delete(long id) {
-        Account accountToDelete = currentSession().load(Account.class, id);
-        if (accountToDelete != null) {
-            currentSession().delete(accountToDelete);
+        try {
+            Account accountToDelete = currentSession().load(Account.class, id);
+            if (accountToDelete != null) {
+                currentSession().delete(accountToDelete);
+            }
+        } catch (EntityNotFoundException e) {
+            throw new NotFoundException(String.format("Account %s not found", id));
         }
     }
 }

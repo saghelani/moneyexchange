@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TransactionService {
 
-    Transaction getTransaction(long transactionId) throws NotFoundException;
+    Transaction getTransaction(long transactionId);
     List<Transaction> getTransactions();
     Transaction executeTransaction(Transaction transaction) throws TransactionExecutionException;
 
