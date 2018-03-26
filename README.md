@@ -74,7 +74,11 @@ Example response:
             "value" : 5
         },
         "type" : "current"
-    }    
+    }
+    
+    Headers
+    
+    Location → http://localhost:8080/accounts/1
 
 #### Update an account
 
@@ -158,7 +162,7 @@ Example request:
 
 Example response:
 
-    HTTP 200 OK
+    HTTP 201 Created
     {
         "id": 3,
         "remitterAccountId": 1,
@@ -169,6 +173,10 @@ Example response:
         },
         "status": "EXECUTED"
     }
+    
+    Headers
+    
+    Location → http://localhost:8080/transactions/3
 
 #### Get all transactions
 
