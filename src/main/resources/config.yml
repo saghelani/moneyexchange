@@ -10,7 +10,7 @@ database:
     hibernate.hbm2ddl.auto: create
 
 server:
-    registerDefaultExceptionMappers: false
+    registerDefaultExceptionMappers: true
 
 logging:
   level: INFO

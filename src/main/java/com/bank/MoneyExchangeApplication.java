@@ -1,6 +1,5 @@
 package com.bank;
 
-import com.bank.config.ConstraintViolationExceptionMapper;
 import com.bank.config.NotFoundExceptionMapper;
 import com.bank.config.TransactionExecutionExceptionMapper;
 import com.bank.controllers.AccountController;
@@ -51,7 +50,6 @@ public class MoneyExchangeApplication extends Application<MoneyExchangeConfigura
        environment.jersey().register(transactionController);
        environment.jersey().register(new NotFoundExceptionMapper());
        environment.jersey().register(new TransactionExecutionExceptionMapper());
-       environment.jersey().register(new ConstraintViolationExceptionMapper());
     }
 
 }
