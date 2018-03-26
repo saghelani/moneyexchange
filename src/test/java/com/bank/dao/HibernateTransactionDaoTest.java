@@ -63,7 +63,7 @@ public class HibernateTransactionDaoTest {
         assertThat(result.getRemitterAccountId(), equalTo(123L));
         assertThat(result.getBeneficiaryAccountId(), equalTo(234L));
         assertThat(result.getAmount().getValue(), equalTo(10.0));
-        assertThat(result.getStatus(), is(nullValue()));
+        assertThat(result.getTransactionResult(), is(nullValue()));
     }
 
     @Test

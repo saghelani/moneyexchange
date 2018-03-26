@@ -1,7 +1,6 @@
 package com.bank;
 
 import com.bank.config.NotFoundExceptionMapper;
-import com.bank.config.TransactionExecutionExceptionMapper;
 import com.bank.controllers.AccountController;
 import com.bank.controllers.TransactionController;
 import com.bank.dao.HibernateAccountDao;
@@ -49,7 +48,6 @@ public class MoneyExchangeApplication extends Application<MoneyExchangeConfigura
        environment.jersey().register(accountController);
        environment.jersey().register(transactionController);
        environment.jersey().register(new NotFoundExceptionMapper());
-       environment.jersey().register(new TransactionExecutionExceptionMapper());
     }
 
 }

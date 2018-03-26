@@ -5,7 +5,6 @@ import com.bank.domain.Account;
 import com.bank.domain.Money;
 import com.bank.domain.Transaction;
 import com.bank.domain.TransactionStatus;
-import com.bank.services.exceptions.TransactionExecutionException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -80,12 +79,12 @@ public class TransactionServiceImplTest {
         Mockito.verify(accountServiceMock, Mockito.times(2)).createOrUpdateAccount(captor.capture());
         List<Account> savedAccount = captor.getAllValues();
 
-        assertThat(result.getStatus(), equalTo(TransactionStatus.EXECUTED));
+        assertThat(result.getTransactionResult().getTransactionStatus(), equalTo(TransactionStatus.EXECUTED));
         assertThat(savedAccount.get(0).getBalance().getValue(), equalTo(90.0));
         assertThat(savedAccount.get(1).getBalance().getValue(), equalTo(60.0));
     }
 
-    @Test(expected = TransactionExecutionException.class)
+    @Test()
     public void testExecuteTransactionWhenAccountHasInsufficientFunds() {
         Transaction expected = new Transaction(123, 234, new Money(Currency.getInstance("GBP"), 10));
         Account account = new Account("John", new Money(Currency.getInstance("GBP"), 5), "current");
@@ -93,31 +92,49 @@ public class TransactionServiceImplTest {
         Mockito.when(accountServiceMock.getAccount(123)).thenReturn(account);
         Mockito.when(accountServiceMock.getAccount(234)).thenReturn(account2);
 
-        try {
-            transactionService.executeTransaction(expected);
-        } catch (TransactionExecutionException e) {
-            ArgumentCaptor<Transaction> captor = ArgumentCaptor.forClass(Transaction.class);
-            Mockito.verify(transactionDaoMock, Mockito.times(1)).saveOrUpdate(captor.capture());
-            Transaction savedTransaction = captor.getValue();
-            assertThat(savedTransaction.getStatus(), equalTo(TransactionStatus.FAILED));
-            throw e;
-        }
+        Transaction transaction = transactionService.executeTransaction(expected);
+
+        Mockito.verify(transactionDaoMock, Mockito.times(1)).saveOrUpdate(any(Transaction.class));
+        assertThat(transaction.getTransactionResult().getTransactionStatus(), equalTo(TransactionStatus.FAILED));
     }
 
-    @Test(expected = TransactionExecutionException.class)
+    @Test()
     public void testExecuteTransactionWhenAccountInvalid() {
         Transaction expected = new Transaction(123, 234, new Money(Currency.getInstance("GBP"), 10));
         Mockito.when(accountServiceMock.getAccount(123)).thenThrow(NotFoundException.class);
 
-        try {
-            transactionService.executeTransaction(expected);
-        } catch (TransactionExecutionException e) {
-            ArgumentCaptor<Transaction> captor = ArgumentCaptor.forClass(Transaction.class);
-            Mockito.verify(transactionDaoMock, Mockito.times(1)).saveOrUpdate(captor.capture());
-            Transaction savedTransaction = captor.getValue();
-            assertThat(savedTransaction.getStatus(), equalTo(TransactionStatus.FAILED));
-            throw e;
-        }
+        Transaction transaction = transactionService.executeTransaction(expected);
+
+        Mockito.verify(transactionDaoMock, Mockito.times(1)).saveOrUpdate(any(Transaction.class));
+        assertThat(transaction.getTransactionResult().getTransactionStatus(), equalTo(TransactionStatus.FAILED));
+    }
+
+    @Test()
+    public void testExecuteTransactionWhenRemitterAccountInDifferentCurrency() {
+        Transaction expected = new Transaction(123, 234, new Money(Currency.getInstance("GBP"), 10));
+        Account account = new Account("John", new Money(Currency.getInstance("USD"), 100), "current");
+        Account account2 = new Account("John", new Money(Currency.getInstance("GBP"), 50), "current");
+        Mockito.when(accountServiceMock.getAccount(123)).thenReturn(account);
+        Mockito.when(accountServiceMock.getAccount(234)).thenReturn(account2);
+
+        Transaction transaction = transactionService.executeTransaction(expected);
+
+        Mockito.verify(transactionDaoMock, Mockito.times(1)).saveOrUpdate(any(Transaction.class));
+        assertThat(transaction.getTransactionResult().getTransactionStatus(), equalTo(TransactionStatus.FAILED));
+    }
+
+    @Test()
+    public void testExecuteTransactionWhenBeneficiaryAccountInDifferentCurrency() {
+        Transaction expected = new Transaction(123, 234, new Money(Currency.getInstance("GBP"), 10));
+        Account account = new Account("John", new Money(Currency.getInstance("GBP"), 100), "current");
+        Account account2 = new Account("John", new Money(Currency.getInstance("USD"), 50), "current");
+        Mockito.when(accountServiceMock.getAccount(123)).thenReturn(account);
+        Mockito.when(accountServiceMock.getAccount(234)).thenReturn(account2);
+
+        Transaction transaction = transactionService.executeTransaction(expected);
+
+        Mockito.verify(transactionDaoMock, Mockito.times(1)).saveOrUpdate(any(Transaction.class));
+        assertThat(transaction.getTransactionResult().getTransactionStatus(), equalTo(TransactionStatus.FAILED));
     }
 
 }

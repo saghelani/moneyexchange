@@ -29,7 +29,8 @@ public class Transaction {
     @Embedded
     private Money amount;
 
-    private TransactionStatus status;
+    @Embedded
+    private TransactionResult result;
 
     public Transaction() {
         // For Jackson
@@ -57,12 +58,12 @@ public class Transaction {
         return beneficiaryAccountId;
     }
 
-    public TransactionStatus getStatus() {
-        return status;
+    public TransactionResult getTransactionResult() {
+        return result;
     }
 
-    public void setStatus(TransactionStatus status) {
-        this.status = status;
+    public void setTransactionResult(TransactionResult result) {
+        this.result = result;
     }
 
 }
