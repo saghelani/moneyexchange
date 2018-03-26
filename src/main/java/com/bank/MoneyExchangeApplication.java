@@ -1,5 +1,6 @@
 package com.bank;
 
+import com.bank.config.ConstraintViolationExceptionMapper;
 import com.bank.config.NotFoundExceptionMapper;
 import com.bank.config.TransactionExecutionExceptionMapper;
 import com.bank.controllers.AccountController;
@@ -7,6 +8,7 @@ import com.bank.controllers.TransactionController;
 import com.bank.dao.HibernateAccountDao;
 import com.bank.dao.HibernateTransactionDao;
 import com.bank.domain.Account;
+import com.bank.domain.Transaction;
 import com.bank.services.AccountServiceImpl;
 import com.bank.services.TransactionServiceImpl;
 import io.dropwizard.Application;
@@ -21,7 +23,7 @@ public class MoneyExchangeApplication extends Application<MoneyExchangeConfigura
         new MoneyExchangeApplication().run(args);
     }
 
-    private final HibernateBundle<MoneyExchangeConfiguration> hibernate = new HibernateBundle<MoneyExchangeConfiguration>(Account.class) {
+    private final HibernateBundle<MoneyExchangeConfiguration> hibernate = new HibernateBundle<MoneyExchangeConfiguration>(Account.class, Transaction.class) {
         @Override
         public DataSourceFactory getDataSourceFactory(MoneyExchangeConfiguration configuration) {
             return configuration.getDataSourceFactory();
@@ -49,6 +51,7 @@ public class MoneyExchangeApplication extends Application<MoneyExchangeConfigura
        environment.jersey().register(transactionController);
        environment.jersey().register(new NotFoundExceptionMapper());
        environment.jersey().register(new TransactionExecutionExceptionMapper());
+       environment.jersey().register(new ConstraintViolationExceptionMapper());
     }
 
 }

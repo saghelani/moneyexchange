@@ -1,6 +1,7 @@
 package com.bank.config;
 
 import com.bank.services.exceptions.TransactionExecutionException;
+import io.dropwizard.jersey.errors.ErrorMessage;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -11,7 +12,7 @@ public class TransactionExecutionExceptionMapper implements ExceptionMapper<Tran
     @Override
     public Response toResponse(TransactionExecutionException e) {
         return Response.status(400)
-                .entity(e.getMessage())
+                .entity(new ErrorMessage(Response.Status.BAD_REQUEST.getStatusCode(), e.getMessage()))
                 .type(MediaType.APPLICATION_JSON)
                 .build();
     }
