@@ -6,7 +6,6 @@ import com.bank.domain.Transaction;
 import com.bank.domain.TransactionResult;
 import com.bank.domain.TransactionStatus;
 import com.bank.services.TransactionService;
-import com.bank.services.exceptions.TransactionExecutionException;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.After;
 import org.junit.ClassRule;
