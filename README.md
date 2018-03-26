@@ -156,7 +156,7 @@ Example request:
 
 Example response:
 
-    HTTP 200 Created
+    HTTP 200 OK
     {
         "id": 3,
         "remitterAccountId": 1,
