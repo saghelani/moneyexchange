@@ -8,6 +8,8 @@ On startup the database is empty and so it has to be populated with the required
 
 The application has been developed using a TDD approach and using the DropWizard framework.
 
+The application is able to support concurrent requests, as all changes to the database are made using their own local Hibernate sessions by using the @UnitOfWork annotation.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -217,3 +219,9 @@ For deploying to live systems, you just need to deploy the fat jar and generate 
 
 * [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
 * [Maven](https://maven.apache.org/) - Dependency Management
+
+## Future improvements
+
+* Add automated integration tests
+* Support multiple currencies
+* Add Guice integration
