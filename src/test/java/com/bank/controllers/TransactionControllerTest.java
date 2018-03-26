@@ -1,9 +1,10 @@
 package com.bank.controllers;
 
 import com.bank.config.NotFoundExceptionMapper;
-import com.bank.config.TransactionExecutionExceptionMapper;
 import com.bank.domain.Money;
 import com.bank.domain.Transaction;
+import com.bank.domain.TransactionResult;
+import com.bank.domain.TransactionStatus;
 import com.bank.services.TransactionService;
 import com.bank.services.exceptions.TransactionExecutionException;
 import io.dropwizard.testing.junit.ResourceTestRule;
@@ -32,8 +33,7 @@ public class TransactionControllerTest {
     public static final ResourceTestRule resources = ResourceTestRule.builder()
             .addResource(new TransactionController(transactionServiceMock))
             .setRegisterDefaultExceptionMappers(false)
-            .addProvider(NotFoundExceptionMapper.class)
-            .addProvider(TransactionExecutionExceptionMapper.class).build();
+            .addProvider(NotFoundExceptionMapper.class).build();
 
     @After
     public void tearDown(){
@@ -79,11 +79,12 @@ public class TransactionControllerTest {
     @Test
     public void testExecuteValidTransaction() {
         Transaction transaction = new Transaction(123, 234, new Money(Currency.getInstance("GBP"), 5));
+        transaction.setTransactionResult(new TransactionResult(TransactionStatus.EXECUTED, "SUCCESS"));
         when(transactionServiceMock.executeTransaction(any(Transaction.class))).thenReturn(transaction);
 
         Response result = resources.target("/transactions").request().post(Entity.entity(transaction, MediaType.APPLICATION_JSON));
 
-        assertThat(result.getStatusInfo(), equalTo(Response.Status.OK));
+        assertThat(result.getStatusInfo(), equalTo(Response.Status.CREATED));
         verify(transactionServiceMock).executeTransaction(any(Transaction.class));
     }
 
@@ -120,22 +121,24 @@ public class TransactionControllerTest {
     @Test
     public void testExecuteTransactionInsufficientFunds() {
         Transaction transaction = new Transaction(123, 234, new Money(Currency.getInstance("GBP"), 5));
-        when(transactionServiceMock.executeTransaction(any(Transaction.class))).thenThrow(new TransactionExecutionException("Insufficient Funds"));
+        transaction.setTransactionResult(new TransactionResult(TransactionStatus.FAILED, "Insufficient funds"));
+        when(transactionServiceMock.executeTransaction(any(Transaction.class))).thenReturn(transaction);
 
         Response result = resources.target("/transactions").request().post(Entity.entity(transaction, MediaType.APPLICATION_JSON));
 
-        assertThat(result.getStatusInfo(), equalTo(Response.Status.BAD_REQUEST));
+        assertThat(result.getStatus(), equalTo(422));
         verify(transactionServiceMock, times(1)).executeTransaction(any(Transaction.class));
     }
 
     @Test
     public void testExecuteTransactionInvalidAccount() {
         Transaction transaction = new Transaction(123, 234, new Money(Currency.getInstance("GBP"), 5));
-        when(transactionServiceMock.executeTransaction(any(Transaction.class))).thenThrow(new TransactionExecutionException("Invalid Account"));
+        transaction.setTransactionResult(new TransactionResult(TransactionStatus.FAILED, "Invalid account"));
+        when(transactionServiceMock.executeTransaction(any(Transaction.class))).thenReturn(transaction);
 
         Response result = resources.target("/transactions").request().post(Entity.entity(transaction, MediaType.APPLICATION_JSON));
 
-        assertThat(result.getStatusInfo(), equalTo(Response.Status.BAD_REQUEST));
+        assertThat(result.getStatus(), equalTo(422));
         verify(transactionServiceMock, times(1)).executeTransaction(any(Transaction.class));
     }
 
